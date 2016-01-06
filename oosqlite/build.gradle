@@ -1,5 +1,29 @@
 apply plugin: 'com.android.library'
 
+ext {
+    bintrayRepo = 'maven'
+    bintrayName = 'oosqlite'
+
+    publishedGroupId = 'com.kkmoving.open'
+    libraryName = 'OOSqlite'
+    artifact = 'oosqlite'
+
+    libraryDescription = 'Object-Oriented Android database framework based on Sqlite'
+
+    siteUrl = 'https://github.com/kkmoving/OOSqliteApp'
+    gitUrl = 'https://github.com/kkmoving/OOSqliteApp.git'
+
+    libraryVersion = '1.0'
+
+    developerId = 'kkmoving'
+    developerName = 'kkmoving'
+    developerEmail = 'zju.chenwei.sc@gmail.com'
+
+    licenseName = 'The Apache Software License, Version 2.0'
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+    allLicenses = ["Apache-2.0"]
+}
+
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.1"
@@ -21,3 +45,6 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
 }
+
+apply from: 'installv1.gradle'
+apply from: 'bintrayv1.gradle'
