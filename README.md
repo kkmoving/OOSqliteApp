@@ -59,11 +59,11 @@ Retrieve
 
 Update
 
-    User.update(mUser);
+    User.update(user);
 
 Delete
 
-    User.delete(mUser);
+    User.delete(user);
 
 
-For detail: http://www.jianshu.com/p/f14a5d72a373
+For more detail: http://www.jianshu.com/p/f14a5d72a373
