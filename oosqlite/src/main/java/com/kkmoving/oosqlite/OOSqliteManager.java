@@ -60,10 +60,8 @@ public class OOSqliteManager {
 	
 	public void initAllDatabase(final Context context) {
 		if (Looper.myLooper() == null || Looper.myLooper() != Looper.getMainLooper()) {
-			//异步线程直接初始化数据库
 			executeInit(context);
 		} else {
-			//同步线程中，另起线程进行数据库初始化
 			new AsyncTask() {
 				@Override
 				protected Object doInBackground(Object... params) {

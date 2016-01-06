@@ -24,8 +24,7 @@ import java.util.Set;
 public abstract class OOSqliteEntity {
 	
 	public static final int QUERY_NO_LIMIT = -1;
-	
-	//字段主键
+
 	private static final String TBL_FIELD_ID = "_id";
 	private static final String TBL_FIELD_LAST_ACCESS_TIME = "_last_access";
 
@@ -77,9 +76,8 @@ public abstract class OOSqliteEntity {
 	}
 	
 	/**
-	 * 插入记录。未插入前，实体是游离的（简单说，也就是ID为空），游离实体只能插入，不能更新和删除。
-	 * 如果要保存游离实体，并希望持有非游离实体，请调用insertFetch方法。
-	 * @param entity
+	 * Insert a entity object. Only detatched Entity object could be insert
+	 * @param entity detached entity object
 	 */
 	public static void insert(OOSqliteEntity entity) {
 		OOSqliteTable table = getTable(entity.getClass());
@@ -105,10 +103,6 @@ public abstract class OOSqliteEntity {
 		}
 	}
 	
-	/**
-	 * 插入一个集合.
-	 * @param list
-	 */
 	public static int insertList(List<? extends OOSqliteEntity> list) {
 		if (list == null || list.size() <= 0) {
 			return -1;
@@ -118,20 +112,14 @@ public abstract class OOSqliteEntity {
 	}
 	
 	/**
-	 * 插入记录，并返回插入后的非游离实体对象。
-	 * @param entity
-	 * @return 返回插入后的非游离实体对象。
+	 * @param entity detached entity object
+	 * @return attached entity object.
 	 */
 	public static OOSqliteEntity insertFetch(OOSqliteEntity entity) {
 		OOSqliteTable table = getTable(entity.getClass());
 		return table.insertFetch(entity);
 	}
 	
-	/**
-	 * 同步查询记录
-	 * @param selection 查询条件语句
-	 * @return 返回满足条件的非游离实体对象列表。
-	 */
 	public static List query(Class cls, String selection) {
 		return query(cls, selection, QUERY_NO_LIMIT);
 	}
@@ -141,12 +129,12 @@ public abstract class OOSqliteEntity {
 	}
 	
 	/**
-	 * 同步按序查询
-	 * @param cls 实体类
-	 * @param selection	 查询条件
-	 * @param orderCol 排序字段
-	 * @param asc 是否升序
-	 * @return 返回满足条件的非游离实体对象列表。
+	 * Query synchronously in order
+	 * @param cls target entity class
+	 * @param selection sql selection
+	 * @param orderCol ordered column
+	 * @param asc ascending order
+	 * @return list of attached entity object matching selection in order
 	 */
 	public static List query(Class cls, String selection, OOColumn orderCol, boolean asc) {
 		return query(cls, selection, orderCol, asc, QUERY_NO_LIMIT);
@@ -167,14 +155,17 @@ public abstract class OOSqliteEntity {
         queryAsync(cls, selection, null, false, QUERY_NO_LIMIT, callback);
     }
 
-	/**
-	 * 异步按序查询
-	 * @param cls 实体类
-	 * @param selection	 查询条件
-	 * @param orderCol 排序字段
-	 * @param asc 是否升序
-	 * @param callback 查询回调
-	 */
+    /**
+     *
+     * Asynchronous query
+     *
+     * @param cls target entity class
+     * @param selection sql selection
+     * @param orderCol ordered column
+     * @param asc ascending order
+     * @param limit max number
+     * @param callback callback for query result
+     */
 	public static void queryAsync(final Class cls, final String selection, final OOColumn orderCol,
 			final boolean asc, final int limit, final LeQueryCallback callback) {
 		Runnable runnable = new Runnable() {
@@ -194,29 +185,24 @@ public abstract class OOSqliteEntity {
 	}
 	
 	/**
-	 * 删除非游离实体
-	 * @param entity 非游离实体
-	 * @return 返回删除的行数
+	 * Only attached entity could be deleted.
+	 * @param entity attached entity object
+	 * @return number of deleted records
 	 */
 	public static int delete(OOSqliteEntity entity) {
 		OOSqliteTable table = getTable(entity.getClass());
 		return table.delete(entity);
 	}
 	
-	/**
-	 * 删除满足条件的记录
-	 * @param whereClause 条件语句
-	 * @return 返回删除的行数
-	 */
 	public static int delete(Class cls, String whereClause) {
 		OOSqliteTable table = getTable(cls);
 		return table.delete(whereClause);
 	}
 	
 	/**
-	 * 更新非游离实体
-	 * @param entity 非游离实体
-	 * @return 返回更新的行数
+	 * Only attached entity could be update.
+	 * @param entity attached entity object
+	 * @return number of update records
 	 */
 	public static int update(OOSqliteEntity entity) {
 		OOSqliteTable table = getTable(entity.getClass());

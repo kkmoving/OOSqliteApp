@@ -56,12 +56,6 @@ public class OOColumn {
 		this(name, columnType, false);
 	}
 	
-	/**
-	 * 
-	 * @param name
-	 * @param columnType
-	 * @param indexing	是否需要索引
-	 */
 	public OOColumn(String name, ColumnType columnType, boolean indexing) {
 		this(name, columnType, indexing, false);
 	}

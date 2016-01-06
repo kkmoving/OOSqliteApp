@@ -28,7 +28,6 @@ import java.util.Set;
 
 class OOSqliteTable {
 
-	//索引
 	public static final String IDX_PREFIX = "idx_";
 
 	protected String mTableName;
@@ -301,12 +300,6 @@ class OOSqliteTable {
 		db.execSQL(sql);
 	}
 
-	/**
-	 * 数据库新建时的回调.
-	 * 
-	 * @param db
-	 *            SQLiteDatabase
-	 */
 	protected void onCreate(final SQLiteDatabase db) {
 		mUsableDb = db;
 		
@@ -319,16 +312,6 @@ class OOSqliteTable {
 		mUsableDb = null;
 	}
 	
-	/**
-	 * 数据库升级时的回调.
-	 * 
-	 * @param db
-	 *            SQLiteDatabase
-	 * @param oldVersion
-	 *            旧数据库的版本号
-	 * @param newVersion
-	 *            新数据库的版本号
-	 */
 	protected void onUpgrade(final SQLiteDatabase db, final int oldVersion, final int newVersion) {
 		mUsableDb = db;
 		
@@ -342,16 +325,6 @@ class OOSqliteTable {
 		mUsableDb = null;
 	}
 	
-	/**
-	 * 数据库降级时的回调.
-	 * 
-	 * @param db
-	 *            SQLiteDatabase
-	 * @param oldVersion
-	 *            旧数据库的版本号
-	 * @param newVersion
-	 *            新数据库的版本号
-	 */
 	protected void onDowngrade(final SQLiteDatabase db, final int oldVersion, final int newVersion) {
 		mUsableDb = db;
 		
@@ -363,10 +336,6 @@ class OOSqliteTable {
 		mUsableDb = null;
 	}
 	
-	/**
-	 * 数据表创建、升级、阶级完成后回调
-	 * @param db
-	 */
 	protected void onOpen(final SQLiteDatabase db) {
 		if (!mReady) {
 			mUsableDb = db;
@@ -399,11 +368,6 @@ class OOSqliteTable {
 		return id;
 	}
 	
-	/**
-	 * 批量插入事务,by zyb。
-	 * @param list 插入的list
-	 * @return 返回插入的条目数， 不一定准确，有可能插入失败.
-	 */
 	public int insertList(List<? extends OOSqliteEntity> list) {
 		if (!dbUsable() || list == null) {
 			return -1;

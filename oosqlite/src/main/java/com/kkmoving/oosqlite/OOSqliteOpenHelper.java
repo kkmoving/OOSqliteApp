@@ -11,7 +11,6 @@ import java.util.List;
 
 class OOSqliteOpenHelper extends SQLiteOpenHelper {
 
-	/** 可以使用write_ahead模式的sdk版本号. */
 	private static final int WRITE_AHEAD_START_SDK = 16;
 
 	private OODatabase mDatabase;
@@ -23,12 +22,8 @@ class OOSqliteOpenHelper extends SQLiteOpenHelper {
 		setDefaultOptions();
 	}
 
-	/**
-	 * 设置默认选项.
-	 */
 	@SuppressLint("NewApi")
 	private void setDefaultOptions() {
-		//4.1及以上版本，默认采用write ahead logging 模式
 		if (Build.VERSION.SDK_INT >= WRITE_AHEAD_START_SDK) {
 			setWriteAheadLoggingEnabled(true);
 		}
