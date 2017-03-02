@@ -1,5 +1,5 @@
 /** 
- * Filename:    LeSqliteEntity.java
+ * Filename:    OOSqliteEntity.java
  * Description:  
  * @author:     kkmoving
  * @version:    1.0
@@ -84,7 +84,7 @@ public abstract class OOSqliteEntity {
 		table.insert(entity);
 	}
 	
-	public static void insertAsync(final OOSqliteEntity entity, final LeInsertCallback listener) {
+	public static void insertAsync(final OOSqliteEntity entity, final InsertCallback listener) {
 		Runnable runnable = new Runnable() {
 			
 			@Override
@@ -151,7 +151,7 @@ public abstract class OOSqliteEntity {
 		return table.query(selection, sortOrder, limitStr);
 	}
 
-    public static void queryAsync(final Class cls, final String selection, final LeQueryCallback callback) {
+    public static void queryAsync(final Class cls, final String selection, final QueryCallback callback) {
         queryAsync(cls, selection, null, false, QUERY_NO_LIMIT, callback);
     }
 
@@ -167,7 +167,7 @@ public abstract class OOSqliteEntity {
      * @param callback callback for query result
      */
 	public static void queryAsync(final Class cls, final String selection, final OOColumn orderCol,
-			final boolean asc, final int limit, final LeQueryCallback callback) {
+			final boolean asc, final int limit, final QueryCallback callback) {
 		Runnable runnable = new Runnable() {
 
 			@Override
@@ -269,11 +269,11 @@ public abstract class OOSqliteEntity {
 		return ID_COLUMN.mName + "=" + id;
 	}
 	
-	public interface LeQueryCallback {
+	public interface QueryCallback {
 		void onQuerySuccess(List list);
 	}
 	
-	public interface LeInsertCallback {
+	public interface InsertCallback {
 		void onComplete(OOSqliteEntity entity);
 	}
 }

@@ -1,5 +1,5 @@
 /** 
- * Filename:    LeColumnDef.java
+ * Filename:    OOColumn.java
  * Description:  
  * @author:     kkmoving
  * @version:    1.0

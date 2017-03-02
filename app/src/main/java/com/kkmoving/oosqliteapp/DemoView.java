@@ -76,7 +76,7 @@ public class DemoView extends LinearLayout {
     }
 
     private void refreshResult() {
-        User.queryAsync(User.class, null, new OOSqliteEntity.LeQueryCallback() {
+        User.queryAsync(User.class, null, new OOSqliteEntity.QueryCallback() {
             @Override
             public void onQuerySuccess(List list) {
                 mDataList = list;

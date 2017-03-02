@@ -46,7 +46,7 @@ public class User extends OOSqliteEntity {
     }
 
     public static void asyncQueryAll() {
-        User.queryAsync(User.class, null, new LeQueryCallback() {
+        User.queryAsync(User.class, null, new QueryCallback() {
             @Override
             public void onQuerySuccess(List list) {
 

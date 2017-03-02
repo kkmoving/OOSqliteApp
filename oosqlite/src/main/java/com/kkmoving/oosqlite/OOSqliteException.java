@@ -1,5 +1,5 @@
 /** 
- * Filename:    LeSqliteException.java
+ * Filename:    OOSqliteException.java
  * Description:  
  * @author:     kkmoving
  * @version:    1.0
