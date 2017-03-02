@@ -120,11 +120,11 @@ public abstract class OOSqliteEntity {
 		return table.insertFetch(entity);
 	}
 	
-	public static List query(Class cls, String selection) {
+	public static <T> List<T> query(Class<T> cls, String selection) {
 		return query(cls, selection, QUERY_NO_LIMIT);
 	}
 	
-	public static List query(Class cls, String selection, int limit) {
+	public static <T> List<T> query(Class<T> cls, String selection, int limit) {
 		return query(cls, selection, null, false, limit);
 	}
 	
@@ -136,11 +136,11 @@ public abstract class OOSqliteEntity {
 	 * @param asc ascending order
 	 * @return list of attached entity object matching selection in order
 	 */
-	public static List query(Class cls, String selection, OOColumn orderCol, boolean asc) {
+	public static <T> List<T> query(Class<T> cls, String selection, OOColumn orderCol, boolean asc) {
 		return query(cls, selection, orderCol, asc, QUERY_NO_LIMIT);
 	}
 	
-	public static List query(Class cls, String selection, OOColumn orderCol, boolean asc, int limit) {
+	public static <T> List<T> query(Class<T> cls, String selection, OOColumn orderCol, boolean asc, int limit) {
 		OOSqliteTable table = getTable(cls);
 		String sortOrder = null;
 		if (orderCol != null) {
@@ -269,11 +269,11 @@ public abstract class OOSqliteEntity {
 		return ID_COLUMN.mName + "=" + id;
 	}
 	
-	public interface QueryCallback {
-		void onQuerySuccess(List list);
+	public interface QueryCallback<T> {
+		void onQuerySuccess(List<T> list);
 	}
 	
-	public interface InsertCallback {
-		void onComplete(OOSqliteEntity entity);
+	public interface InsertCallback<T> {
+		void onComplete(T entity);
 	}
 }
