@@ -198,9 +198,9 @@ class OOSqliteTable {
 	public static String equalSelection(OOColumn columnDef, Object value) {
 		String selection = null;
 		if (columnDef.mColumnType == OOColumn.ColumnType.INTEGER) {
-			selection = columnDef.mName + "=" + ((Integer) value).intValue();
+			selection = columnDef.mName + "=" + value.toString();
 		} else if (columnDef.mColumnType == OOColumn.ColumnType.LONG) {
-			selection = columnDef.mName + "=" + ((Long) value).longValue();
+			selection = columnDef.mName + "=" + value.toString();
 		} else if (columnDef.mColumnType == OOColumn.ColumnType.TEXT) {
 			selection = columnDef.mName + "='" + ((String) value) + "'";
 		} else if (columnDef.mColumnType == OOColumn.ColumnType.BOOLEAN) {
@@ -217,9 +217,9 @@ class OOSqliteTable {
 			boolean rightLike) {
 		String selection = null;
 		if (columnDef.mColumnType == OOColumn.ColumnType.INTEGER) {
-			selection = columnDef.mName + "=" + ((Integer) value).intValue();
+			selection = columnDef.mName + "=" + value.toString();
 		} else if (columnDef.mColumnType == OOColumn.ColumnType.LONG) {
-			selection = columnDef.mName + "=" + ((Long) value).longValue();
+			selection = columnDef.mName + "=" + value.toString();
 		} else if (columnDef.mColumnType == OOColumn.ColumnType.TEXT) {
 			value = ((String) value).replace("'", "''");
 			if (!leftLike && !rightLike) {
